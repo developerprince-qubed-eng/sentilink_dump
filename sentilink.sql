@@ -337,6 +337,7 @@ COPY public.customer_record (id, customer_globalid, eye_color, hair_color, heigh
 --
 
 COPY public.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
+1	1	Initialize	SQL	V1__Initialize.sql	-1496119903	postgres	2021-04-30 16:19:58.678056	14598	t
 \.
 
 
