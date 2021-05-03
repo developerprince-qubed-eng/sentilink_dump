@@ -128,26 +128,6 @@ CREATE TABLE public.customer_record (
 ALTER TABLE public.customer_record OWNER TO postgres;
 
 --
--- Name: flyway_schema_history; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.flyway_schema_history (
-    installed_rank integer NOT NULL,
-    version character varying(50),
-    description character varying(200) NOT NULL,
-    type character varying(20) NOT NULL,
-    script character varying(1000) NOT NULL,
-    checksum integer,
-    installed_by character varying(100) NOT NULL,
-    installed_on timestamp without time zone DEFAULT now() NOT NULL,
-    execution_time integer NOT NULL,
-    success boolean NOT NULL
-);
-
-
-ALTER TABLE public.flyway_schema_history OWNER TO postgres;
-
---
 -- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -160,21 +140,6 @@ CREATE SEQUENCE public.hibernate_sequence
 
 
 ALTER TABLE public.hibernate_sequence OWNER TO postgres;
-
---
--- Name: reason_codes; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.reason_codes (
-    id bigint NOT NULL,
-    code character varying(255),
-    direction character varying(255),
-    explanation character varying(255),
-    rank character varying(255)
-);
-
-
-ALTER TABLE public.reason_codes OWNER TO postgres;
 
 --
 -- Name: senti_pay_load; Type: TABLE; Schema: public; Owner: postgres
@@ -277,7 +242,7 @@ ALTER TABLE public.senti_pay_load_complete_response OWNER TO postgres;
 --
 
 CREATE TABLE public.senti_pay_load_complete_response_updated_fields (
-    id bigint NOT NULL,
+    senti_pay_load_complete_response_id bigint NOT NULL,
     updated_fields character varying(255)
 );
 
@@ -317,94 +282,6 @@ CREATE TABLE public.senti_pay_load_response_scores (
 ALTER TABLE public.senti_pay_load_response_scores OWNER TO postgres;
 
 --
--- Data for Name: customer_profile; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.customer_profile (id, card_revision_date, compliance_type, country_territory_of_issuance, date_of_birth, document_discriminator, eye_color, family_name_truncation, first_name, first_names_truncation, hair_color, height_inftin, inventory_control_number, last_name, license_expiration_date, licenseidnumber, license_oriddocument_issue_date, mailing_city, mailing_jurisdiction_code, mailing_postal_code, mailing_street_address1, middle_name, organ_donor_indicator, sex, virginia_specific_class, virginia_specific_endorsements, virginia_specific_restrictions, weight_inlbs) FROM stdin;
-\.
-
-
---
--- Data for Name: customer_record; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.customer_record (id, customer_globalid, eye_color, hair_color, height_incm, height_in_ft_in, sex, weight_in_kg, weight_in_lbs, cell_phone, city, county, email_preffered, email_primary, email_work, email_secondary, home_phone, mailing_city, mailing_jurisdiction_code, mailingmsa, mailingmsacode, mailing_postal_code, mailing_state, mailing_street_address1, mailing_street_address2, msa, msa_code, postal_code, rent_own, res_type, state, street_name, street_number, time_at_present_address_mnths, time_at_present_address_yrs, unit_or_appt, date_created, date_of_birth, educ_level, family_name, first_name, given_name, last_name, license_expiration_date, licenseidnumber, license_state, middle_initial, middle_name, name_prefix, name_suffix, non_resident_indicator, privacy_indicator, privacy_type, social_security_number, social_security_number_fraud1, social_security_number_fraud2, social_security_number_fraud3, status, status_description) FROM stdin;
-\.
-
-
---
--- Data for Name: flyway_schema_history; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) FROM stdin;
-1	1	Initialize	SQL	V1__Initialize.sql	-1496119903	postgres	2021-04-30 16:19:58.678056	14598	t
-\.
-
-
---
--- Data for Name: reason_codes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.reason_codes (id, code, direction, explanation, rank) FROM stdin;
-\.
-
-
---
--- Data for Name: senti_pay_load; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.senti_pay_load (id, address_line_1, address_line_2, alt_address_line_1, alt_address_line_2, alt_city, alt_country_code, alt_email, alt_phone, alt_state_code, alt_zipcode, application_created, application_id, business_name, business_url, city, country_code, device_id, dob, ein, email, first_name, ip_address, last_name, lead_type, loan_amount, loan_currency, any_additional_data, phone, ssn, state_code, user_created, user_id, zipcode) FROM stdin;
-\.
-
-
---
--- Data for Name: senti_pay_load_complete; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.senti_pay_load_complete (id, address_line_1, application_created, application_id, city, dob, first_name, last_name, ssn, state_code, user_created, user_id, zipcode) FROM stdin;
-\.
-
-
---
--- Data for Name: senti_pay_load_complete_response; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.senti_pay_load_complete_response (id, address_line_1, application_created, application_id, city, dob, first_name, last_name, ssn, state_code, user_created, user_id, zipcode, confidence_level, environment, latency_ms, notes, "timestamp", transaction_id) FROM stdin;
-\.
-
-
---
--- Data for Name: senti_pay_load_complete_response_updated_fields; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.senti_pay_load_complete_response_updated_fields (id, updated_fields) FROM stdin;
-\.
-
-
---
--- Data for Name: senti_pay_load_response; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.senti_pay_load_response (id, application_id, customer_id, environment, latency_ms, notes, "timestamp", transaction_id) FROM stdin;
-\.
-
-
---
--- Data for Name: senti_pay_load_response_scores; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.senti_pay_load_response_scores (senti_pay_load_response_id, name, score, version) FROM stdin;
-\.
-
-
---
--- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.hibernate_sequence', 1, false);
-
-
---
 -- Name: customer_profile customer_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -418,22 +295,6 @@ ALTER TABLE ONLY public.customer_profile
 
 ALTER TABLE ONLY public.customer_record
     ADD CONSTRAINT customer_record_pkey PRIMARY KEY (id);
-
-
---
--- Name: flyway_schema_history flyway_schema_history_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.flyway_schema_history
-    ADD CONSTRAINT flyway_schema_history_pk PRIMARY KEY (installed_rank);
-
-
---
--- Name: reason_codes reason_codes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.reason_codes
-    ADD CONSTRAINT reason_codes_pkey PRIMARY KEY (id);
 
 
 --
@@ -469,18 +330,11 @@ ALTER TABLE ONLY public.senti_pay_load_response
 
 
 --
--- Name: flyway_schema_history_s_idx; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX flyway_schema_history_s_idx ON public.flyway_schema_history USING btree (success);
-
-
---
--- Name: senti_pay_load_complete_response_updated_fields fkb87ktr3x9mmsrdf5cxt07mc0a; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: senti_pay_load_complete_response_updated_fields fk5cm5w0ay7rujqku1af0nm54hu; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.senti_pay_load_complete_response_updated_fields
-    ADD CONSTRAINT fkb87ktr3x9mmsrdf5cxt07mc0a FOREIGN KEY (id) REFERENCES public.senti_pay_load_complete_response(id);
+    ADD CONSTRAINT fk5cm5w0ay7rujqku1af0nm54hu FOREIGN KEY (senti_pay_load_complete_response_id) REFERENCES public.senti_pay_load_complete_response(id);
 
 
 --
